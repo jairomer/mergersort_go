@@ -5,7 +5,7 @@ import (
   "fmt"
   "reflect"
 )
-
+// TODO: Put in README an image of a mergesort tree.
 func toStr(in []int) string {
   out := "["
   first := true
@@ -40,9 +40,18 @@ func TestSort1(t *testing.T) {
 }
 
 func TestSort2(t *testing.T) {
-  want := []int{2,1}
-  in := []int{1,2}
+  want := []int{1,2}
+  in := []int{2,1}
   if got := Sort(in); !reflect.DeepEqual(want, got) {
     t.Errorf("Sort() = %s, want %s", toStr(got), toStr(want))
   }
 }
+
+func TestSort3(t *testing.T) {
+  want := []int{1,2,3,4}
+  in := []int{2,3,1,4}
+  if got := Sort(in); !reflect.DeepEqual(want, got) {
+    t.Errorf("Sort() = %s, want %s", toStr(got), toStr(want))
+  }
+}
+

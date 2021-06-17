@@ -13,7 +13,67 @@ package mergesort
 *       Call merge (arr, l, m, r)
 */
 
+func merge(arr []int, left int, middle int, right int) {
+  // Find sizes for each half.
+  n1 := middle - left + 1
+  n2 := right - middle
+
+  // Create temporal arrays.
+  var leftArr []int = []int{}
+  var rightArr []int = []int{}
+
+  // Copy data
+  for i:=0; i<n1; i++ {
+    leftArr = append(leftArr, arr[i + left])
+  }
+  for j:=0; j<n2; j++ {
+    rightArr = append(rightArr, arr[j+middle+1])
+  }
+
+  // Merge the temp arrays back into arr[l..r]
+  il := 0 // Initial left subarray index
+  ir := 0 // Initial right subarray index
+  k  := left // Initial merged subarray index
+
+  for (il < n1 && ir < n2) {
+    if ( leftArr[il] <= rightArr[ir] ) {
+      arr[k] = leftArr[il]
+      il++
+    } else {
+      arr[k] = rightArr[ir]
+      ir++
+    }
+    k++
+  }
+
+  // Copy the remaining elements of the left array, if any
+  for il < n1 {
+    arr[k] = leftArr[il]
+    il++
+    k++
+  }
+  // Copy the remaining elements of the right array, if any
+  for ir < n2 {
+    arr[k] = rightArr[ir]
+    ir++
+    k++
+  }
+}
+
+func mergeSort(arr []int, l int, r int) {
+  if l >= r {
+    return
+  }
+  // Find middle point
+  m := l + (r-l)/2
+  mergeSort(arr,l,m)
+  mergeSort(arr,m+1,r)
+  merge(arr,l,m,r)
+}
+
+// Sort an array
 func Sort(in []int) []int {
-  out := []int{1}
+  var out []int = in
+  mergeSort(out, 0, len(in)-1)
   return out
 }

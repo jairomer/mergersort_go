@@ -1,0 +1,25 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/neusynk/Workspace/repos/mergesort_go/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20210110.0/
+How?	README.md	/^## How?$/;"	s	chapter:mergersort_go
+Sort	mergesort.go	/^func Sort(in []int) []int {$/;"	f	package:mergesort	typeref:typename:[]int
+TestSort1	mergesort_test.go	/^func TestSort1(t *testing.T) {$/;"	f	package:mergesort
+TestSort2	mergesort_test.go	/^func TestSort2(t *testing.T) {$/;"	f	package:mergesort
+TestSort3	mergesort_test.go	/^func TestSort3(t *testing.T) {$/;"	f	package:mergesort
+TesttoStr	mergesort_test.go	/^func TesttoStr(t *testing.T) {$/;"	f	package:mergesort
+What is this?	README.md	/^## What is this?$/;"	s	chapter:mergersort_go
+Why?	README.md	/^## Why?$/;"	s	chapter:mergersort_go
+merge	mergesort.go	/^func merge(arr []int, left int, middle int, right int) {$/;"	f	package:mergesort
+mergeSort	mergesort.go	/^func mergeSort(arr []int, l int, r int) {$/;"	f	package:mergesort
+mergersort_go	README.md	/^# mergersort_go$/;"	c
+mergesort	mergesort.go	/^package mergesort$/;"	p
+mergesort	mergesort_test.go	/^package mergesort$/;"	p
+toStr	mergesort_test.go	/^func toStr(in []int) string {$/;"	f	package:mergesort	typeref:typename:string
