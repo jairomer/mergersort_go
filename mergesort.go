@@ -1,5 +1,9 @@
 package mergesort
 
+import (
+  "sync"
+)
+
 /**
 * MergeSort(arr[], l, r)
 *   If r > l
@@ -13,6 +17,7 @@ package mergesort
 *       Call merge (arr, l, m, r)
 */
 
+var mu sync.Mutex
 func merge(arr []int, left int, middle int, right int) {
   // Find sizes for each half.
   n1 := middle - left + 1
@@ -23,6 +28,8 @@ func merge(arr []int, left int, middle int, right int) {
   var rightArr []int = []int{}
 
   // Copy data
+  mu.Lock()
+  defer mu.Unlock()
   for i:=0; i<n1; i++ {
     leftArr = append(leftArr, arr[i + left])
   }
@@ -60,6 +67,55 @@ func merge(arr []int, left int, middle int, right int) {
   }
 }
 
+func concurrentMerge(arr []int, left int, middle int, right int) []int{
+  here := arr
+  // Find sizes for each half.
+  n1 := middle - left + 1
+  n2 := right - middle
+
+  // Create temporal arrays.
+  var leftArr []int = []int{}
+  var rightArr []int = []int{}
+
+  // Copy data
+  for i:=0; i<n1; i++ {
+    leftArr = append(leftArr, here[i + left])
+  }
+  for j:=0; j<n2; j++ {
+    rightArr = append(rightArr, here[j+middle+1])
+  }
+
+  // Merge the temp arrays back into arr[l..r]
+  il := 0 // Initial left subarray index
+  ir := 0 // Initial right subarray index
+  k  := left // Initial merged subarray index
+
+  for (il < n1 && ir < n2) {
+    if ( leftArr[il] <= rightArr[ir] ) {
+      here[k] = leftArr[il]
+      il++
+    } else {
+      here[k] = rightArr[ir]
+      ir++
+    }
+    k++
+  }
+
+  // Copy the remaining elements of the left array, if any
+  for il < n1 {
+    here[k] = leftArr[il]
+    il++
+    k++
+  }
+  // Copy the remaining elements of the right array, if any
+  for ir < n2 {
+    here[k] = rightArr[ir]
+    ir++
+    k++
+  }
+  return here;
+}
+
 func mergeSort(arr []int, l int, r int) {
   if l >= r {
     return
@@ -71,9 +127,38 @@ func mergeSort(arr []int, l int, r int) {
   merge(arr,l,m,r)
 }
 
+func concurrentMergeSort(arrr []int, l int, r int) []int {
+  arr := arrr
+  if l >= r {
+    return arr
+  }
+  // Find middle point
+  m := l + (r-l)/2
+  channel1 := make(chan []int)
+  channel2 := make(chan []int)
+  go func(){
+    arr = concurrentMergeSort(arr,l,m)
+    channel1 <- arr
+  }()
+  go func(){
+    arr := <-channel1
+    arr = concurrentMergeSort(arr,m+1,r)
+    channel2 <- arr
+  }()
+  arr = <-channel2
+  arr = concurrentMerge(arr,l,m,r)
+  return arr
+}
+
 // Sort an array
 func Sort(in []int) []int {
   var out []int = in
-  mergeSort(out, 0, len(in)-1)
+  mergeSort(out, 0, len(out)-1)
+  return out
+}
+
+func GoSort(in []int) []int {
+  var out []int = in
+  concurrentMergeSort(out, 0, len(out)-1)
   return out
 }
