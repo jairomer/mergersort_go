@@ -6,7 +6,6 @@ import (
   "reflect"
   "math/rand"
 )
-// TODO: Put in README an image of a mergesort tree.
 func toStr(in []int) string {
   out := "["
   first := true
@@ -17,7 +16,7 @@ func toStr(in []int) string {
     } else {
       out += ", " + fmt.Sprint(i)
     }
-  }
+    }
   out += "]"
   return out
 }
@@ -64,37 +63,71 @@ func TestSort4(t *testing.T) {
   }
 }
 
-func TestGoSort1(t *testing.T) {
+func TestGoSortA1(t *testing.T) {
   want := []int{1}
   in := []int{1}
-  if got := GoSort(in); !reflect.DeepEqual(want, got) {
-    t.Errorf("GoSort() = %s, want %s", toStr(got), toStr(want))
+  if got := GoSortA(in); !reflect.DeepEqual(want, got) {
+    t.Errorf("GoSortA() = %s, want %s", toStr(got), toStr(want))
   }
 }
 
-func TestGoSort2(t *testing.T) {
+func TestGoSortA2(t *testing.T) {
   want := []int{1,2}
   in := []int{2,1}
-  if got := GoSort(in); !reflect.DeepEqual(want, got) {
-    t.Errorf("GoSort() = %s, want %s", toStr(got), toStr(want))
+  if got := GoSortA(in); !reflect.DeepEqual(want, got) {
+    t.Errorf("GoSortA() = %s, want %s", toStr(got), toStr(want))
   }
 }
 
-func TestGoSort3(t *testing.T) {
+func TestGoSortA3(t *testing.T) {
   want := []int{1,2,3,4}
   in := []int{2,3,1,4}
-  if got := GoSort(in); !reflect.DeepEqual(want, got) {
-    t.Errorf("GoSort() = %s, want %s", toStr(got), toStr(want))
+  if got := GoSortA(in); !reflect.DeepEqual(want, got) {
+    t.Errorf("GoSortA() = %s, want %s", toStr(got), toStr(want))
   }
 }
 
-func TestGoSort4(t *testing.T) {
+func TestGoSortA4(t *testing.T) {
   want := []int{1,2,3,4,5,6,7,8,9,10,11,12}
   in := []int{2,3,1,4,12,5,6,10,9,8,11,7}
-  if got := GoSort(in); !reflect.DeepEqual(want, got) {
-    t.Errorf("GoSort() = %s, want %s", toStr(got), toStr(want))
+  if got := GoSortA(in); !reflect.DeepEqual(want, got) {
+    t.Errorf("GoSortA() = %s, want %s", toStr(got), toStr(want))
   }
 }
+
+func TestGoSortB1(t *testing.T) {
+  want := []int{1}
+  in := []int{1}
+  if got := GoSortB(in); !reflect.DeepEqual(want, got) {
+    t.Errorf("GoSortB() = %s, want %s", toStr(got), toStr(want))
+  }
+}
+
+func TestGoSortB2(t *testing.T) {
+  want := []int{1,2}
+  in := []int{2,1}
+  if got := GoSortB(in); !reflect.DeepEqual(want, got) {
+    t.Errorf("GoSortB() = %s, want %s", toStr(got), toStr(want))
+  }
+}
+
+func TestGoSortB3(t *testing.T) {
+  want := []int{1,2,3,4}
+  in := []int{2,3,1,4}
+  if got := GoSortB(in); !reflect.DeepEqual(want, got) {
+    t.Errorf("GoSortB() = %s, want %s", toStr(got), toStr(want))
+  }
+}
+
+func TestGoSortB4(t *testing.T) {
+  want := []int{1,2,3,4,5,6,7,8,9,10,11,12}
+  in := []int{2,3,1,4,12,5,6,10,9,8,11,7}
+  if got := GoSortB(in); !reflect.DeepEqual(want, got) {
+    t.Errorf("GoSortB() = %s, want %s", toStr(got), toStr(want))
+  }
+}
+
+
 
 
 
@@ -114,7 +147,7 @@ func BenchmarkSort(b *testing.B) {
   }
 }
 
-func BenchmarkGoSort(b *testing.B) {
+func BenchmarkGoSortA(b *testing.B) {
   arr := [][]int{}
   out := [][]int{}
   // Fill 10 arrays with random integers
@@ -126,6 +159,22 @@ func BenchmarkGoSort(b *testing.B) {
   }
   // Sort those 10 arrays.
   for i:=0; i<1; i++ {
-    out = append(out, GoSort(arr[i]))
+    out = append(out, GoSortA(arr[i]))
+  }
+}
+
+func BenchmarkGoSortB(b *testing.B) {
+  arr := [][]int{}
+  out := [][]int{}
+  // Fill 10 arrays with random integers
+  for i:=0; i<1; i++ {
+    arr = append(arr, []int{})
+    for j:=0; j<b.N; j++ {
+      arr[i] = append(arr[i], rand.Int())
+    }
+  }
+  // Sort those 10 arrays.
+  for i:=0; i<1; i++ {
+    out = append(out, GoSortB(arr[i]))
   }
 }

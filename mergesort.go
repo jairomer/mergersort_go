@@ -1,9 +1,5 @@
 package mergesort
 
-import (
-  "sync"
-)
-
 /**
 * MergeSort(arr[], l, r)
 *   If r > l
@@ -17,7 +13,6 @@ import (
 *       Call merge (arr, l, m, r)
 */
 
-var mu sync.Mutex
 func merge(arr []int, left int, middle int, right int) {
   // Find sizes for each half.
   n1 := middle - left + 1
@@ -28,8 +23,6 @@ func merge(arr []int, left int, middle int, right int) {
   var rightArr []int = []int{}
 
   // Copy data
-  mu.Lock()
-  defer mu.Unlock()
   for i:=0; i<n1; i++ {
     leftArr = append(leftArr, arr[i + left])
   }
@@ -127,7 +120,23 @@ func mergeSort(arr []int, l int, r int) {
   merge(arr,l,m,r)
 }
 
-func concurrentMergeSort(arrr []int, l int, r int) []int {
+func trivialConcurrentMergeSort(arr []int, l int, r int) {
+  if l >= r {
+    return
+  }
+  // Find middle point
+  m := l + (r-l)/2
+  mergeSort(arr,l,m)
+  channel := make(chan []int)
+  go func() {
+    mergeSort(arr,m+1,r)
+    channel <- arr
+  }()
+  arr = <-channel
+  merge(arr,l,m,r)
+}
+
+func pipelinedConcurrentMergeSort(arrr []int, l int, r int) []int {
   arr := arrr
   if l >= r {
     return arr
@@ -137,18 +146,19 @@ func concurrentMergeSort(arrr []int, l int, r int) []int {
   channel1 := make(chan []int)
   channel2 := make(chan []int)
   go func(){
-    arr = concurrentMergeSort(arr,l,m)
+    arr = pipelinedConcurrentMergeSort(arr,l,m)
     channel1 <- arr
   }()
   go func(){
     arr := <-channel1
-    arr = concurrentMergeSort(arr,m+1,r)
+    arr = pipelinedConcurrentMergeSort(arr,m+1,r)
     channel2 <- arr
   }()
   arr = <-channel2
   arr = concurrentMerge(arr,l,m,r)
   return arr
 }
+
 
 // Sort an array
 func Sort(in []int) []int {
@@ -157,8 +167,16 @@ func Sort(in []int) []int {
   return out
 }
 
-func GoSort(in []int) []int {
+func GoSortA(in []int) []int {
   var out []int = in
-  concurrentMergeSort(out, 0, len(out)-1)
+  trivialConcurrentMergeSort(out, 0, len(out)-1)
   return out
 }
+
+func GoSortB(in []int) []int {
+  var out []int = in
+  pipelinedConcurrentMergeSort(out, 0, len(out)-1)
+  return out
+}
+
+

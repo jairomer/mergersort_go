@@ -9,15 +9,23 @@
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20210110.0/
-BenchmarkGoSort	mergesort_test.go	/^func BenchmarkGoSort(b *testing.B) {$/;"	f	package:mergesort
+BenchmarkGoSortA	mergesort_test.go	/^func BenchmarkGoSortA(b *testing.B) {$/;"	f	package:mergesort
+BenchmarkGoSortB	mergesort_test.go	/^func BenchmarkGoSortB(b *testing.B) {$/;"	f	package:mergesort
 BenchmarkSort	mergesort_test.go	/^func BenchmarkSort(b *testing.B) {$/;"	f	package:mergesort
-GoSort	mergesort.go	/^func GoSort(in []int) []int {$/;"	f	package:mergesort	typeref:typename:[]int
+GoSortA	mergesort.go	/^func GoSortA(in []int) []int {$/;"	f	package:mergesort	typeref:typename:[]int
+GoSortB	mergesort.go	/^func GoSortB(in []int) []int {$/;"	f	package:mergesort	typeref:typename:[]int
 How?	README.md	/^## How?$/;"	s	chapter:mergersort_go
+S	parallel_mergesort.go	/^var S [][]int$/;"	v	package:mergesort	typeref:typename:[][]int
 Sort	mergesort.go	/^func Sort(in []int) []int {$/;"	f	package:mergesort	typeref:typename:[]int
-TestGoSort1	mergesort_test.go	/^func TestGoSort1(t *testing.T) {$/;"	f	package:mergesort
-TestGoSort2	mergesort_test.go	/^func TestGoSort2(t *testing.T) {$/;"	f	package:mergesort
-TestGoSort3	mergesort_test.go	/^func TestGoSort3(t *testing.T) {$/;"	f	package:mergesort
-TestGoSort4	mergesort_test.go	/^func TestGoSort4(t *testing.T) {$/;"	f	package:mergesort
+SortParallel	parallel_mergesort.go	/^func SortParallel(in []int) []int {$/;"	f	package:mergesort	typeref:typename:[]int
+TestGoSortA1	mergesort_test.go	/^func TestGoSortA1(t *testing.T) {$/;"	f	package:mergesort
+TestGoSortA2	mergesort_test.go	/^func TestGoSortA2(t *testing.T) {$/;"	f	package:mergesort
+TestGoSortA3	mergesort_test.go	/^func TestGoSortA3(t *testing.T) {$/;"	f	package:mergesort
+TestGoSortA4	mergesort_test.go	/^func TestGoSortA4(t *testing.T) {$/;"	f	package:mergesort
+TestGoSortB1	mergesort_test.go	/^func TestGoSortB1(t *testing.T) {$/;"	f	package:mergesort
+TestGoSortB2	mergesort_test.go	/^func TestGoSortB2(t *testing.T) {$/;"	f	package:mergesort
+TestGoSortB3	mergesort_test.go	/^func TestGoSortB3(t *testing.T) {$/;"	f	package:mergesort
+TestGoSortB4	mergesort_test.go	/^func TestGoSortB4(t *testing.T) {$/;"	f	package:mergesort
 TestSort1	mergesort_test.go	/^func TestSort1(t *testing.T) {$/;"	f	package:mergesort
 TestSort2	mergesort_test.go	/^func TestSort2(t *testing.T) {$/;"	f	package:mergesort
 TestSort3	mergesort_test.go	/^func TestSort3(t *testing.T) {$/;"	f	package:mergesort
@@ -25,12 +33,16 @@ TestSort4	mergesort_test.go	/^func TestSort4(t *testing.T) {$/;"	f	package:merge
 TesttoStr	mergesort_test.go	/^func TesttoStr(t *testing.T) {$/;"	f	package:mergesort
 What is this?	README.md	/^## What is this?$/;"	s	chapter:mergersort_go
 Why?	README.md	/^## Why?$/;"	s	chapter:mergersort_go
+channels	parallel_mergesort.go	/^var channels []chan []int$/;"	v	package:mergesort	typeref:typename:[]chan []int
 concurrentMerge	mergesort.go	/^func concurrentMerge(arr []int, left int, middle int, right int) []int{$/;"	f	package:mergesort	typeref:typename:[]int
-concurrentMergeSort	mergesort.go	/^func concurrentMergeSort(arrr []int, l int, r int) []int {$/;"	f	package:mergesort	typeref:typename:[]int
 merge	mergesort.go	/^func merge(arr []int, left int, middle int, right int) {$/;"	f	package:mergesort
 mergeSort	mergesort.go	/^func mergeSort(arr []int, l int, r int) {$/;"	f	package:mergesort
 mergersort_go	README.md	/^# mergersort_go$/;"	c
 mergesort	mergesort.go	/^package mergesort$/;"	p
 mergesort	mergesort_test.go	/^package mergesort$/;"	p
-mu	mergesort.go	/^var mu sync.Mutex$/;"	v	package:mergesort	typeref:typename:sync.Mutex
+mergesort	parallel_mergesort.go	/^package mergesort$/;"	p
+mergesort	parallel_mergesort_test.go	/^package mergesort$/;"	p
+parallelMultiwayMergesort	parallel_mergesort.go	/^func parallelMultiwayMergesort(in []int, processor_count int) []int{$/;"	f	package:mergesort	typeref:typename:[]int
+pipelinedConcurrentMergeSort	mergesort.go	/^func pipelinedConcurrentMergeSort(arrr []int, l int, r int) []int {$/;"	f	package:mergesort	typeref:typename:[]int
 toStr	mergesort_test.go	/^func toStr(in []int) string {$/;"	f	package:mergesort	typeref:typename:string
+trivialConcurrentMergeSort	mergesort.go	/^func trivialConcurrentMergeSort(arr []int, l int, r int) {$/;"	f	package:mergesort
