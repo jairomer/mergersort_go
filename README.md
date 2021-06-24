@@ -13,3 +13,8 @@ I am interested in learning go, and over time I have found that implementing mer
 There are two implementations:
 - Classic: Using recursion.
 - Concurrent: Using go coroutines.
+
+To run the tests and the benchmarks:
+```
+go test -bench .
+```

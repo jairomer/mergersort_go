@@ -5,6 +5,7 @@ import (
   "fmt"
   "reflect"
   "math/rand"
+  "sort"
 )
 func toStr(in []int) string {
   out := "["
@@ -176,5 +177,22 @@ func BenchmarkGoSortB(b *testing.B) {
   // Sort those 10 arrays.
   for i:=0; i<1; i++ {
     out = append(out, GoSortB(arr[i]))
+  }
+}
+
+func BenchmarkGoSortStd(b *testing.B) {
+  arr := [][]int{}
+  out := [][]int{}
+  // Fill 10 arrays with random integers
+  for i:=0; i<1; i++ {
+    arr = append(arr, []int{})
+    for j:=0; j<b.N; j++ {
+      arr[i] = append(arr[i], rand.Int())
+    }
+  }
+  // Sort those 10 arrays.
+  for i:=0; i<1; i++ {
+    sort.Ints(arr[i])
+    out = append(out, arr[i])
   }
 }
